@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Layout Lab – Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      min-width: 280px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 1.5rem;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.9rem;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      text-align: center;
+      min-height: 1.2em;
+    }
+    .error { color: #c00; }
+    .success { color: #0a0; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input id="username" type="text" autocomplete="username" />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" />
+
+      <button type="submit">Login</button>
+      <div id="message" class="message"></div>
+    </form>
+  </div>
+
+  <script>
+    // same credentials as your EB login widget
+    const EXPECTED_USER = "user";
+    const EXPECTED_PASS = "idac"; // adjust if you change it in EB
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value;
+      const msg = document.getElementById("message");
+
+      if (u === EXPECTED_USER && p === EXPECTED_PASS) {
+        msg.textContent = "Login successful, loading dashboard…";
+        msg.className = "message success";
+        // redirect into the Experience Builder app
+        window.location.href = "app/";
+      } else {
+        msg.textContent = "Invalid username or password.";
+        msg.className = "message error";
+      }
+    });
+  </script>
+</body>
+</html>
